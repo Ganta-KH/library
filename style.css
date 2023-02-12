@@ -62,9 +62,9 @@ main > button > svg {
 
 .books {
     display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 400px));
+    grid-template-columns: repeat(auto-fit, 350px);
 
-    grid-auto-rows: 400px;
+    grid-auto-rows: 300px;
     place-content: center;
     gap: 24px;
 }
@@ -80,10 +80,18 @@ main > button > svg {
     transition: 0.2s;
 }
 
-footer {
-    font-size: 17px;
-    font-weight: 500;
-    padding: 14px;
+.book {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+.book p {
+    margin: 0;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -95,6 +103,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    display: none;
 }
 
 form {
@@ -115,7 +125,8 @@ form p {
 }
 
 form input,
-form button {
+form button,
+.book button {
     font-size: 22px;
     border: none;
     padding: 10px 15px;
@@ -145,4 +156,11 @@ form button:hover {
 
 form button:focus {
     background-color: #334155;
+}
+
+footer {
+    font-size: 17px;
+    font-weight: 500;
+    padding: 14px;
+    text-align: center;
 }
