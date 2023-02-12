@@ -3,15 +3,16 @@
 :root {
     --shadow: 0 5px 5px #cbd5e1;
     --background-color: #f1f5f9;
-    --header-background-color: #e2e8f0;
+    --card-background-color: #e2e8f0;
 }
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -27,7 +28,7 @@ header {
     font-weight: bold;
     padding: 28px;
     text-align: center;
-    background-color: var(--header-background-color);
+    background-color: var(--card-background-color);
     box-shadow: var(--shadow);
 }
 
@@ -62,16 +63,16 @@ main > button > svg {
 .books {
     display: grid;
     grid-template-columns: repeat(3, minmax(250px, 400px));
-   
+
     grid-auto-rows: 400px;
     place-content: center;
     gap: 24px;
 }
 
 .books > div {
-    border: 1px solid black;
     box-shadow: 5px 5px 5px #cbd5e1;
-    border-radius: 10px;
+    border-radius: 8px;
+    background-color: var(--card-background-color);
 }
 
 .books > div:hover {
@@ -84,4 +85,64 @@ footer {
     font-weight: 500;
     padding: 14px;
     text-align: center;
+}
+
+.new {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 400px;
+    background-color: var(--card-background-color);
+    padding: 10px 25px;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+form p {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+form input,
+form button {
+    font-size: 22px;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+form label {
+    font-size: 20px;
+}
+
+form button {
+    background-color: #64748b;
+    color: var(--card-background-color);
+}
+
+form button:hover {
+    background-color: #475569;
+    cursor: pointer;
+}
+
+form button:focus {
+    background-color: #334155;
 }
