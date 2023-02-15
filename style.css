@@ -157,6 +157,21 @@ form button:focus {
     background-color: #334155;
 }
 
+.read {
+    background-color: #86efac;
+}
+
+.remove {
+    background-color: #fca5a5;
+}
+
+.read:hover,
+.remove:hover {
+    transform: scale(1.03);
+    transition: 0.5;
+    cursor: pointer;
+}
+
 footer {
     font-size: 17px;
     font-weight: 500;
