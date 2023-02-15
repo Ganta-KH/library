@@ -39,6 +39,12 @@ function Book(title, author, pages, read) {
 
 function showBooks(myLibrary) {
     const books = document.querySelector(".books");
+
+    function readbook(read) {
+        if (read === 'Read') return '</p><button class="read">' + read + '</button>'
+        return '</p><button class="read not-read">' + read + "</button>";
+    }
+
     for (let book of myLibrary) {
         books.innerHTML +=
             '<div class="book"><p>' +
@@ -47,9 +53,7 @@ function showBooks(myLibrary) {
             book.author +
             "</p><p>" +
             book.pages +
-            "</p><button class='read'>" +
-            book.read +
-            "</button>" +
+            readbook(book.read) +
             "<button class='remove'>Remove</button></div>";
     }
 }
@@ -75,7 +79,7 @@ function addBookToLibrary() {
         const title = document.querySelector("#title").value;
 
         if (checkTitle(title)) {
-            alert('The title "'+title+'" already exist.')
+            alert('The title "' + title + '" already exist.');
             return;
         }
 
@@ -99,7 +103,20 @@ function addBookToLibrary() {
 }
 
 Book.prototype.changeRead = function () {
-    
-}
+    const btnRead = document.querySelector(".read");
+    btnRead.addEventListener("click", () => {
+        btnRead.classList.toggle("not-read");
+    });
+};
 
 addBookToLibrary();
+
+const btnRead = document.querySelectorAll(".read");
+btnRead.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        console.log(btn.parentNode.childNodes);
+        btnRead.classList.toggle("not-read");
+        btnRead.textContent =
+            btnRead.textContent === "Read" ? "Not read" : "Read";
+    });
+});

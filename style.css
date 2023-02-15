@@ -161,6 +161,10 @@ form button:focus {
     background-color: #86efac;
 }
 
+.not-read {
+    background-color: #fca5a5;
+}
+
 .remove {
     background-color: #fca5a5;
 }
