@@ -2,6 +2,7 @@ const showForm = document.querySelector(".show");
 const form = document.querySelector(".new");
 const formCard = document.querySelector("form");
 const submit = document.querySelector("#submit");
+let myLibrary = [];
 
 showForm.addEventListener("click", () => {
     form.style.cssText = "display: flex;";
@@ -15,26 +16,39 @@ formCard.addEventListener("click", (e) => {
     e.stopPropagation();
 });
 
-let myLibrary = [
-    {
-        title: "One Piece",
-        author: "Oda",
-        pages: 250,
-        read: "Read",
-    },
-    {
-        title: "naruto shippuden",
-        author: "boruto",
-        pages: 250,
-        read: "Not read",
-    },
-];
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+}
+
+function changeRead() {
+    const btnRead = document.querySelectorAll(".read");
+    btnRead.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            btn.classList.toggle("not-read");
+            btn.textContent = btn.textContent === "Read" ? "Not read" : "Read";
+            changeReadInLibrary(btn.parentNode.childNodes[0].textContent);
+        });
+    });
+}
+
+function removeBook() {
+    const btnRemove = document.querySelectorAll(".remove");
+    btnRemove.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const bookTitle = btn.parentNode.childNodes[0].textContent;
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].title === bookTitle) {
+                    myLibrary.splice(i, 1);
+                    removeBooks();
+                    showBooks(myLibrary);
+                    break;
+                }
+            }
+        });
+    });
 }
 
 function showBooks(myLibrary) {
@@ -57,6 +71,9 @@ function showBooks(myLibrary) {
             readbook(book.read) +
             "<button class='remove'>Remove</button></div>";
     }
+
+    changeRead();
+    removeBook();
 }
 
 function removeBooks() {
@@ -108,22 +125,8 @@ function addBookToLibrary() {
 
         removeBooks();
         showBooks(myLibrary);
-        book.changeRead();
     });
 }
-
-Book.prototype.changeRead = function () {
-    const btnRead = document.querySelectorAll(".read");
-    btnRead.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            btn.classList.toggle("not-read");
-            btn.textContent = btn.textContent === "Read" ? "Not read" : "Read";
-            changeReadInLibrary(btn.parentNode.childNodes[0].textContent);
-        });
-    });
-};
-
-
 
 addBookToLibrary();
 showBooks(myLibrary);
