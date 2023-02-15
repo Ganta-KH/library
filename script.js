@@ -41,7 +41,8 @@ function showBooks(myLibrary) {
     const books = document.querySelector(".books");
 
     function readbook(read) {
-        if (read === 'Read') return '</p><button class="read">' + read + '</button>'
+        if (read === "Read")
+            return '</p><button class="read">' + read + "</button>";
         return '</p><button class="read not-read">' + read + "</button>";
     }
 
@@ -72,6 +73,14 @@ function checkTitle(title) {
     return false;
 }
 
+function changeReadInLibrary(title) {
+    for (let book of myLibrary) {
+        if (book.title === title) {
+            book.read = book.read === "Read" ? "Not read" : "Read";
+        }
+    }
+}
+
 function addBookToLibrary() {
     submit.addEventListener("click", (e) => {
         e.preventDefault();
@@ -90,7 +99,7 @@ function addBookToLibrary() {
         const book = new Book(
             title,
             author,
-            pages,
+            parseInt(pages),
             read !== null ? "Read" : "Not read"
         );
         myLibrary.push(book);
@@ -99,24 +108,22 @@ function addBookToLibrary() {
 
         removeBooks();
         showBooks(myLibrary);
+        book.changeRead();
     });
 }
 
 Book.prototype.changeRead = function () {
-    const btnRead = document.querySelector(".read");
-    btnRead.addEventListener("click", () => {
-        btnRead.classList.toggle("not-read");
+    const btnRead = document.querySelectorAll(".read");
+    btnRead.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            btn.classList.toggle("not-read");
+            btn.textContent = btn.textContent === "Read" ? "Not read" : "Read";
+            changeReadInLibrary(btn.parentNode.childNodes[0].textContent);
+        });
     });
 };
 
-addBookToLibrary();
 
-const btnRead = document.querySelectorAll(".read");
-btnRead.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        console.log(btn.parentNode.childNodes);
-        btnRead.classList.toggle("not-read");
-        btnRead.textContent =
-            btnRead.textContent === "Read" ? "Not read" : "Read";
-    });
-});
+
+addBookToLibrary();
+showBooks(myLibrary);
